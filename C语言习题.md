@@ -382,27 +382,13 @@ void ExactlySquaredNumber(){
 ## 分解质因数
 
 ```c
-#define MAX 1000
-int prime_num[MAX+1] = {0};
-
-void PrimeNum() {
-    //0为素数 1为合数
-    for (int i = 2; i < (MAX+1);i++){
-        if(!prime_num[i]){
-            for (int j = i + i; j < (MAX+1);j+=i){
-                prime_num[j] = 1;
-            }
-        }
-    }
-}
-
 void DecomposePrimeFactors(int n) {
     if(n == 0 || n == 1){
         return;
     }
-    if(prime_num[n]){
+    if(n是素数){
         for (int j = 2; j < (MAX+1);j++){
-            if((prime_num[j] == 0) && (n % j == 0)){
+            if(n % j == 0){
                 printf("%d*", j);
                 DecomposePrimeFactors(n / j);
                 break;
