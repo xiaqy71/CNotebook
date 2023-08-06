@@ -400,3 +400,106 @@ void DecomposePrimeFactors(int n) {
     }
 }
 ```
+
+## 括号匹配
+
+```c
+int validParentheses(char *s)
+{
+    char temp[100] = "";
+    int end = -1;
+    for (int i = 0; s[i] != '\0';i++)
+    {
+        if(s[i] == '{' || s[i] == '[' || s[i] == '(')
+        {
+            temp[++end] = s[i];
+        }
+        else if(s[i] == '}')
+        {
+            if(temp[end] == '{')
+            {
+                end--;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else if(s[i] == ']')
+        {
+            if(temp[end] == '[')
+            {
+                end--;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else if(s[i] == ')')
+        {
+            if(temp[end] == '(')
+            {
+                end--;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+```
+
+## 大数加法
+
+```c
+void swap(char* c1, char* c2) {
+    char t = *c1;
+    *c1 = *c2;
+    *c2 = t;
+}
+
+void reverse(char* str)
+{
+    int i = 0;
+    int j = strlen(str) - 1;
+    while (i < j) {
+        swap(&str[i++], &str[j--]);
+    }
+}
+
+
+char* solve(const char* s, const char* t)
+{
+    int count = 0;
+    int rex = 0;
+    int index = 0;
+    int i = strlen(s) - 1;
+    int j = strlen(t) - 1;
+    char* str = (char*)malloc(sizeof(char));
+    while (i >= 0 || j >= 0)
+    {
+        count++;
+        int n1, n2;
+        n1 = i >= 0 ? s[i] - '0' : 0;
+        n2 = j >= 0 ? t[j] - '0' : 0;
+        int n = (n1 + n2 + rex) % 10;
+        rex = (n1 + n2 + rex) / 10;
+        str = (char*)realloc(str, sizeof(char) * (count + 1));
+        str[index++] = n + '0';
+        i--;
+        j--;
+    }
+    if (rex != 0)
+    {
+        count++;
+        str = (char*)realloc(str, sizeof(char) * (count + 1));
+        str[index++] = rex + '0';
+    }
+    str[count] = '\0';
+    reverse(str);
+    return str;
+}
+```
