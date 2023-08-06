@@ -473,6 +473,11 @@ void reverse(char* str)
 
 char* solve(const char* s, const char* t)
 {
+    if(s == NULL && t == NULL){
+        char* str = (char*)malloc(sizeof(char)*2);
+        strcpy(str,"0");
+        return str;
+    }
     int count = 0;
     int rex = 0;
     int index = 0;
